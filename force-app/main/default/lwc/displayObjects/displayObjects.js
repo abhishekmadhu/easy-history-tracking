@@ -1,5 +1,6 @@
 import { LightningElement, wire, track } from 'lwc';
 import getAllObjects from '@salesforce/apex/DisplayObjectsController.getAllObjects';
+import getHistoryTrackingInfo from '@salesforce/apex/ExportHistoryTrackingController.getHistoryTrackingInfo';
 
 export default class DisplayObjects extends LightningElement {
     @track objects = [];
@@ -11,16 +12,17 @@ export default class DisplayObjects extends LightningElement {
     @track isLoading = true;
 
     // For export button
-    get exportData() {
-        // Placeholder: return objects in the required CSV format
-        // TODO: Replace with real data including fields and history tracking
-        return this.filteredObjects.map(obj => ({
-            objectLabel: obj.label,
-            objectApiName: obj.apiName,
-            fieldLabel: '',
-            fieldApiName: '',
-            historyTracking: false
-        }));
+    @track exportData = [];
+
+    // Fetch field-level data only for export, not for UI
+    async handleExportHistory() {
+        try {
+            const result = await getHistoryTrackingInfo();
+            this.template.querySelector('c-export-history-button').exportData = result;
+            this.template.querySelector('c-export-history-button').handleExport();
+        } catch (e) {
+            // Optionally handle error
+        }
     }
 
     @wire(getAllObjects)
