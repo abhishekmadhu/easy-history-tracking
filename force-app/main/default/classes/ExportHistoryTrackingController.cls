@@ -5,11 +5,11 @@ public with sharing class ExportHistoryTrackingController {
     @AuraEnabled(cacheable=true)
     public static List<HistoryTrackingInfo> getHistoryTrackingInfo() {
         // No parameter: fetch for all objects
-        return getHistoryTrackingInfoForObjects(null);
+        return getHistoryTrackingInfo(null);
     }
 
     @AuraEnabled(cacheable=true)
-    public static List<HistoryTrackingInfo> getHistoryTrackingInfoForObjects(List<String> objectApiNames) {
+    public static List<HistoryTrackingInfo> getHistoryTrackingInfo(List<String> objectApiNames) {
         System.debug('Fetching history tracking info for objects: ' + objectApiNames);
         try {
             // Check read access for FieldDefinition and EntityDefinition

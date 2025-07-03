@@ -20,7 +20,7 @@ public class ExportHistoryTrackingControllerTest {
     static void testGetHistoryTrackingInfoForAccount() {
         List<String> objectApiNames = new List<String>{'Account'};
         Test.startTest();
-        List<ExportHistoryTrackingController.HistoryTrackingInfo> result = ExportHistoryTrackingController.getHistoryTrackingInfoForObjects(objectApiNames);
+        List<ExportHistoryTrackingController.HistoryTrackingInfo> result = ExportHistoryTrackingController.getHistoryTrackingInfo(objectApiNames);
         Test.stopTest();
         System.assert(result != null, 'Result should not be null');
         System.assert(result.size() > 0, 'There should be at least one field returned');

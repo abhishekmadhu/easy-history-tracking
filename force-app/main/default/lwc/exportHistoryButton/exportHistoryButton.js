@@ -1,11 +1,25 @@
 import { LightningElement, api } from 'lwc';
+import getHistoryTrackingInfo from '@salesforce/apex/ExportHistoryTrackingController.getHistoryTrackingInfo';
 
 export default class ExportHistoryButton extends LightningElement {
-    @api exportData = [];
+    @api selectedObjectMap = {};
     @api fileName = 'history_tracking.csv';
+    exportData = [];
 
-    handleExport() {
-        if (!this.exportData || !this.exportData.length) {
+    async handleExport() {
+        // Get selected object API names from selectedObjectMap
+        const selectedApiNames = Object.keys(this.selectedObjectMap || {}).filter(apiName => this.selectedObjectMap[apiName]);
+        if (!selectedApiNames.length) {
+            // No selection, do nothing
+            return;
+        }
+        try {
+            // Fetch export data for selected objects
+            this.exportData = await getHistoryTrackingInfo({ objectApiNames: selectedApiNames });
+        } catch (e) {
+            this.exportData = [];
+        }
+        if (!this.exportData.length) {
             // No data to export
             return;
         }
