@@ -1,18 +1,27 @@
-# Salesforce DX Project: Next Steps
+# README
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+## Who is this for?
 
-## How Do You Plan to Deploy Your Changes?
+Are you a Salesforce consultant who is constantly frustrated when working with field history tracking with customers because you cannot export history tracking information easily?
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+Now you can! This project provides a simple, robust solution to quickly view, filter, and export Salesforce field history tracking information for any set of objects in your org. No more manual clicks, no more confusion—just select, export, and share.
 
-## Configure Your Salesforce DX Project
+## How It Works (for Consultants)
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+- Visit the page
+- Select Objects
+- Export
+- Send to customer
 
-## Read All About It
+With this tool, you can instantly see all objects in your Salesforce org, filter and select the ones you care about, and export a CSV with all field history tracking details. The exported file is ready to send to your customer or use in your own documentation. No technical setup or deep Salesforce knowledge required—just point, click, and deliver.
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+## Technical Details
+
+This project is built as a Salesforce DX project with:
+
+- **Lightning Web Components (LWC):** A modern UI that lists all objects, allows filtering, sorting, and selection, and provides a single-click export button.
+- **Apex Controllers:** Secure, efficient Apex classes fetch object and field metadata, including history tracking status, using Salesforce's Tooling API and SOQL. The logic is robust for large orgs and avoids hitting Salesforce query limits.
+- **CSV Export:** The export is generated client-side and is Lightning Web Security (LWS) compatible, so it works in all Salesforce orgs.
+- **Test Coverage:** Apex and LWC Jest tests ensure reliability and maintainability.
+
+For more details, see the documentation in the `ai-docs` folder.
