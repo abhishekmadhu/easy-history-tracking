@@ -1,4 +1,4 @@
-# README
+# Easy Salesforce Field History Tracking
 
 ## Who is this for?
 
